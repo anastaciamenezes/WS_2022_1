@@ -1,10 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryColumn } from "typeorm"
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
 import Cage from "./Cage"
 import Species from "./Species";
 
 @Entity()
 export default class Specimen {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number
 
   @Column()
@@ -18,4 +18,5 @@ export default class Specimen {
 
   @ManyToOne(() => Cage)
   cage: Cage
+  zookeeper: any;
 }

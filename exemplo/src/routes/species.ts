@@ -7,13 +7,7 @@ export const speciesRouter = Router()
 const speciesCtrl = new SpeciesController()
 
 speciesRouter.post('/', async (req, res) => {
-  const {
-    scientificName,
-    commonName,
-    order,
-    family,
-    habitat
-  } = req.body
+  const { scientificName, commonName, order, family, habitat } = req.body
 
   if (scientificName && commonName && order && family && habitat) {
     const species = new Species()
@@ -26,19 +20,31 @@ speciesRouter.post('/', async (req, res) => {
     const savedSpecies = await speciesCtrl.save(species)
     return res.status(201).json({ species: savedSpecies })
   }
-    return res.status(400).json({ message: 'Bad request' })
+
+  return res.status(400).json({ message: 'Bad request' })
 })
+
 speciesRouter.get('/', async (req, res) => {
   const species = await speciesCtrl.findAll()
   return res.json({ species })
 })
+
 speciesRouter.get('/:id', async (req, res) => {
   const aux = req.params.id
   const id = parseInt(aux)
 
+speciesRouter.get('/habitat/:query',async (req, res) => {
+  const habitat = req.params.query
+  const query = String(habitat)
+})
+
+speciesRouter.get('/single/:scientificName', async (req, res) => {
+  const single = req.params.scientificName
+  const scientificName = String(single)
+})  
   const species = await speciesCtrl.findById(id)
 
-  if (species) {
+if (species) {
     return res.json({ species })
   }
 

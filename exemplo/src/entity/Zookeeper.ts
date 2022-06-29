@@ -1,9 +1,9 @@
-import { Column, Entity, ManyToMany, PrimaryColumn } from 'typeorm'
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm'
 import Cage from './Cage'
 
 @Entity()
 export default class Zookeeper {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   registrationCode: string
 
   @Column()
